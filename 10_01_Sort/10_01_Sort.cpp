@@ -75,6 +75,7 @@ void shakerSort(int arr[], int size) {
 
 	} while (left < right);
 }
+
 int main()
 {
 	srand(time(0));
