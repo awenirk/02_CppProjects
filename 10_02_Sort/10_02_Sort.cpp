@@ -62,40 +62,40 @@ void sortArray(int arr[], int size, int set = 1) {
 //  ментів(найлівішого від'ємного елемента і найправі-
 //  шого від'ємного елемента) і впорядкувати елементи,
 //  що знаходяться між ними.
-void findNegativeBorder(int arr[], int size) {
-    int j, temp, index = 1;
-    int left = 0, right = size - 1;
-    for (int i = 0; i < size; i++)
-    {
+void findNegativeBorders(int arr[], int size) {
+    int left = -1;
+    int right = -1;
+    int temp;
 
+    // Найлівіший від'ємний
+    for (int i = 0; i < size; i++) {
+        if (arr[i] < 0) {
+            left = i;
+            break;
+        }
     }
 
-
-
-    do {
-        for (j = right; j >= left; j--) {
-            if (arr[j - 1] > arr[j]) {
-                temp = arr[j - 1];
-                arr[j - 1] = arr[j];
-                arr[j] = temp;
-            }index = j;
+    // Найправіший від'ємний
+    for (int i = size - 1; i >= 0; i--) {
+        if (arr[i] < 0) {
+            right = i;
+            break;
         }
-        left = index + 1;
-        for (j = left; j <= right; j++)
-        {
-            if (arr[j - 1] > arr[j]) {
-                temp = arr[j - 1];
-                arr[j - 1] = arr[j];
+    }
+
+    // Сортуємо елементи МІЖ ними
+    for (int i = left + 1; i < right; i++) {
+        for (int j = i + 1; j < right; j++) {
+            if (arr[i] > arr[j]) {
+                temp = arr[i];
+                arr[i] = arr[j];
                 arr[j] = temp;
             }
-            index = j;
         }
-        right = index - 1;
+    }
 
-    } while (left < right);
-
-
-
+    cout << "Left negative index: " << left << endl;
+    cout << "Right negative index: " << right << endl;
 }
 
 
@@ -119,6 +119,37 @@ void RandArr(int arr[], int size) {
     }
 }
 
+void Task3(int arr[], int size) {
+    int randomNum = rand() % 20 + 1;
+    int pos = 0;
+
+    for (int i = 0; i < size; i++) {
+        if (arr[i] == randomNum) {
+            pos = i;
+            break;
+        }
+    }
+
+    for (int i = 0; i < pos; i++) {
+        for (int j = i + 1; j < pos; j++) {
+            if (arr[i] < arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+
+    for (int i = pos + 1; i < size; i++) {
+        for (int j = i + 1; j < size; j++) {
+            if (arr[i] > arr[j]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+    }
+}
 
 
 
@@ -157,7 +188,23 @@ int main()
     InitArr1(arr1, size);
     ShowArr(arr1, size);
 
-    RandArr(arr1, size);
+    findNegativeBorders(arr1, size);
     ShowArr(arr1, size);
+
+
+
+
+
+    int arr2[20];
+
+    for (int i = 0; i < 20; i++) {
+        arr2[i] = i + 1;
+    }
+
+    RandArr(arr2, 20);
+    ShowArr(arr2, 20);
+
+    Task3(arr2, 20);
+    ShowArr(arr2, 20);
 
 }
