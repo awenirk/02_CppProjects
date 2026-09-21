@@ -13,12 +13,14 @@ void ShowArr(int arr[], int size) {
 	}
 	cout << endl;
 }
+
 int linearSearch(int arr[], int size, int key) {
 	for (int i = 0; i < size; i++) {
 		if (arr[i] == key) return i;
 	}
 	return -1;
 }
+
 void selectSort(int arr[], int size) {
 	int temp, index;
 	for (int i = 0; i < size; i++) {
