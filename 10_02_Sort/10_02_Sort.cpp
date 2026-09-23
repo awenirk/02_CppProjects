@@ -152,17 +152,6 @@ void Task3(int arr[], int size) {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 int main()
 {
     srand(time(0));
