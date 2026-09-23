@@ -143,8 +143,10 @@ int main()
         parr++;
     }
 
+    // odne i te same
     parr = &arr[0];
-    parr = arr; // odne i te same
+    parr = arr;
+    // odne i te same
 
     for (int i = 0; i < size; i++) {
         cout << *parr << " ";
