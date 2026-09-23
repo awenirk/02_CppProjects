@@ -3,7 +3,8 @@ using namespace std;
 
 int main()
 {
-    int num, i = 1;
+    long num;
+    int i = 1;
     cout << " " << "Enter Your number: "; cin >> num;
     cout << " " << "Your num: " << num << endl;
     do {
@@ -19,5 +20,5 @@ int main()
             cout << "Error!" << endl;
         }
         i++;
-    } while (num != 1);
+    } while (num > 1);
 }

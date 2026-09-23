@@ -71,11 +71,11 @@ int indexMinSum(int arr[], int size, int index, int minSum, int minIndex) {
 
 // Task 5
 int Game() {
-    int rod1[3] = { 3, 2, 1 };
-    int rod2[3] = {};
-    int rod3[3] = {};
+    int rod1[5] = { 5, 4, 3, 2, 1 };
+    int rod2[5] = {};
+    int rod3[5] = {};
 
-    int count1 = 3;
+    int count1 = 5;
     int count2 = 0;
     int count3 = 0;
 
@@ -83,7 +83,7 @@ int Game() {
     int disc;
     bool canMove;
 
-    while (count3 != 3)
+    while (count3 != 5)
     {
         cout << endl << "Rod 1: ";
         for (int i = 0; i < count1; i++)
@@ -197,6 +197,6 @@ int main()
     */
 
     /* Task 5
-    Game();
     */
+    Game();
 }
