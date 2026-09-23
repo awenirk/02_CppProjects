@@ -1,17 +1,73 @@
-// 11_02_PraaktWork.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include <iostream>
+using namespace std;
+
+// 1.Дано три числа.Оголосити вказівники на ці числа.Отримати добуток трьох
+// заданих чисел, середє арифметичне, найменше з них, користуючись
+// непрямим доступом до чисел(через вказівники).
+
+
+
+
+
+
+
+
+
+
+
+// 2.Дано цілочисельний одновимірний масив.Заповнити його,
+// вивести на екран у прямому та зворотньому порядку та порахувати
+// суму елементів з використанням вказівників.
+
+
+
+
+
+
+
+
+
+
+
+// 3.Дано одновимірний масив.Знайти найбільше та найменше значення у
+// масиві та поміняти їх у масиві місцями.Вивести перетворений масив на екран.
+
+
+
+
+
+
+
+
+
+
+
+// 4.Дано масив цілих чисел.Користуючись вказівниками, поміняти місцями елементи
+// масиву з парними и непарними індексами(тобто ті елементи масиву, які стоять
+// на парних місцях, поміняти з елементами, які стоять на непарних місцях).
+
+
+
+
+
+
+
 
 
 int main()
 {
-    std::cout << "Hello World!\n";
+    const int size = 10;
+    int a = 5, b = 5, c = 5;
+    int* pa = &a, *pb = &b, *pc = &c;
+
+
+
+    cout << "Hello World!" << endl;
+
+
+
+
+
+
+
 }
-
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
