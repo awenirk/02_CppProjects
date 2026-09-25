@@ -136,7 +136,7 @@ int main()
     // Pointers ... links
     int a = 8;   // variable
     int* pa = &a; // pointer
-    int& la = a;  // ling
+    int& la = a;  // link
     cout << "a = " << a << endl;
     cout << "pa = " << pa << endl;
     cout << "*pa = " << *pa << endl;
