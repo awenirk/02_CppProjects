@@ -5,7 +5,7 @@ void Change(int a) {
     a++;
 }
 void Change(int *a) { // Address
-    *a++;
+    (*a)++;
 }
 
 int FindMax3(int a, int b, int c) {
