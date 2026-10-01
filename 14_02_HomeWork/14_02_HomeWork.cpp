@@ -19,19 +19,23 @@ void SetPos(int x, int y)
 
 // 4.Написати функцію, яка отримує рядок і повертає довжину рядка.
 // Без використання функції strlen()
-
-
-
-
-
+int Length(char text[]) {
+    int len = 0, i = 0;
+    while (text[i] != '\0') {
+        len++;
+        i++;
+    }
+    return len;
+}
 
 
 int main()
 {
-    char text[] = "Today I went to the park and played football with my friends";
+    char text[] = "Today I went to the park and played football with my friends",
+        text1[255];
     int numA = 0, numO = 0,
         numLetters = 0, numDigit = 0, numSpaces = 0,
-        isDel = 0,
+        j = 0,
         numVowels = 0, numConsonants = 0, numPunctuation = 0;
     char symbol = 'W';
     // 1.Вводиться рядок.Яких букв у рядку більше ’а’ чи ’о’ ?
@@ -39,7 +43,7 @@ int main()
     //cout << "Enter Line: "; cin.getline(text, 255);
     cout << endl << text << endl;
     
-    for (int i = 0; i < sizeof(text); i++) {
+    for (int i = 0; i < strnlen_s(text, 255); i++) {
         if (text[i] == 'a' or text[i] == 'A')
             numA++;
         else if (text[i] == 'o' or text[i] == 'O')
@@ -72,6 +76,9 @@ int main()
     }
     cout << "Edited text: " << text << endl;
 
+    // Task 4
+    cout << endl << "Text : " << text << endl;
+    cout << "Lenght without strlen(): " << Length(text) << endl;
 
 
     // На додаткові 12 балів
@@ -79,13 +86,13 @@ int main()
     cout << endl << "Text : " << text << endl;
     // cout << "Enter symbol to delete: "; cin >> symbol;
     for (int i = 0; i < strnlen_s(text, 255); i++) {
-        if (isDel) text[i] = text[i + 1];
-        if (text[i] == symbol) {
-            text[i] = text[i + 1];
-            isDel++;
+        if (text[i] != symbol) {
+            text1[j] = text[i];
+            j++;
         }
     }
-    cout << endl << "Text : " << text << endl;
+    text1[j] = '\0';
+    cout << endl << "Text : " << text1 << endl;
 
     // 6 ***.Розробити програму, яка зчитує з екрану рядок, а потім видає статистику :
     // кількість пробільних символів(whitespaces), голосних, приголосних, знаків пунктуації.
@@ -112,8 +119,4 @@ int main()
     cout << "Count consonants -> " << numConsonants << endl;
     cout << "Count punctuation marks -> " << numPunctuation << endl;
 
-
-    // _strupr_s();
-    // _strlwr_s();
-    // _strrev();
 }
