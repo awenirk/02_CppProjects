@@ -2,7 +2,7 @@
 using namespace std;
 
 struct Пральна_машинка {
-
+    
 };
 
 
