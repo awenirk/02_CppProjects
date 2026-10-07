@@ -90,7 +90,6 @@ void ReadFromFile(Human*& arr, int& size) {
 }
 
 
-
 int main()
 {
     /*
@@ -156,12 +155,5 @@ int main()
         }
     }
 
-
     delete[] people;
-
-
-
-
-
-
 }
