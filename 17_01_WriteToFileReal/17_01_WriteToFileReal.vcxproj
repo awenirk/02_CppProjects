@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{9dc88bec-e381-4964-ba77-04b5d1073c4e}</ProjectGuid>
-    <RootNamespace>My1601ClassWork</RootNamespace>
+    <ProjectGuid>{b0fe63b4-9ff7-4347-9ed2-008e6568789a}</ProjectGuid>
+    <RootNamespace>My1701WriteToFileReal</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>16_02_ClassWork</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -124,7 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="16_01_ClassWork.cpp" />
+    <ClCompile Include="17_01_WriteToFileReal.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
