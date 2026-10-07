@@ -46,7 +46,6 @@ int menu() {
     cout << "Enter your choice: "; cin >> choice;
     return choice;
 }
-}
 enum MENU { EXIT, ADD = 1, SHOW };
 
 void addNewHuman(Human*& arr, int &size) {
