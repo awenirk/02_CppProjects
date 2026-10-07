@@ -1,7 +1,7 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
-
+const char* file = "MyHumanBase.txt";
 struct Human {
 private:
     char name[50];
@@ -9,7 +9,7 @@ private:
     int age;
 public:
     void Show() {
-        cout << " Name: " << name << endl << " Surname: " << surname << endl << " Age: " << age;
+        cout << " Name: " << name << endl << " Surname: " << surname << endl << " Age: " << age << endl;;
     }
     void Fill() {
         cout << "Enter name: "; cin >> name;
@@ -21,6 +21,21 @@ public:
         strcpy_s(surname, h.surname);
         age = h.age;
     }
+    void SaveToFile() {
+        ofstream out(file, ios_base::app);
+        out << name;
+        out << ": ";
+        out << surname;
+        out << ": ";
+        out << age;
+        out << "| ";
+        out.close();
+    }
+    void FillFromFile(char* nameF, char* surnameF, int ageF) {
+        strcpy_s(name, nameF);
+        strcpy_s(surname, surnameF);
+        age = ageF;
+    }
 };
 int menu() {
     int choice;
@@ -31,6 +46,7 @@ int menu() {
     cout << "Enter your choice: "; cin >> choice;
     return choice;
 }
+}
 enum MENU { EXIT, ADD = 1, SHOW };
 
 void addNewHuman(Human*& arr, int &size) {
@@ -40,13 +56,41 @@ void addNewHuman(Human*& arr, int &size) {
     }
     temp[size].Fill();
     delete[] arr;
+    arr = temp;
     size++;
+    arr[size - 1].SaveToFile();
 }
 void showPeople(Human* h, int size) {
     for (int i = 0; i < size; i++) {
         h[i].Show();
     }
+    cout << endl;
 }
+
+void ReadFromFile(Human*& arr, int& size) {
+    ifstream in(file, ios_base::in);
+    char buf_name[250], buf_surname[250], buf_age[250];
+    while (!in.eof()) {
+        in.getline(buf_name, 250,  ':');
+        if (in.eof()) break;
+        in.getline(buf_surname, 250,  ':');
+        in.getline(buf_age, 250,  '|');
+        int age = atoi(buf_age);
+        Human readHuman;
+        readHuman.FillFromFile(buf_name, buf_surname, age );
+
+        Human* temp = new Human[size + 1];
+        for (int i = 0; i < size; i++) {
+            temp[i].copy(arr[i]);
+        }
+        temp[size] = readHuman;
+        delete[] arr;
+        arr = temp;
+        size++;
+    }
+}
+
+
 
 int main()
 {
@@ -84,12 +128,15 @@ int main()
 
     in.close();
     */
-    Human human{};
-    human.Fill();
-    human.Show();
-    cout << endl << endl;
+    // Human human{};
+    // human.Fill();
+    // human.Show();
+    // cout << endl << endl;
+
     int size = 0;
     Human* people = new Human[size];
+
+    ReadFromFile(people, size);
 
     bool isExit = false;
     while (!isExit) {
