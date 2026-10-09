@@ -3,6 +3,7 @@
 #include <conio.h>
 #include <iomanip>
 #include <windows.h>
+
 using namespace std;
 
 const char* file = "Library.txt";
@@ -122,6 +123,47 @@ struct Book {
     char genre[50];
     int year;
     float price;
+    void copy(Book b) {
+        id = b.id;
+        strcpy_s(name, b.name);
+        strcpy_s(author, b.author);
+        strcpy_s(publisher, b.publisher);
+        strcpy_s(genre, b.genre);
+        year = b.year;
+        price = b.price;
+    }
+    void WriteToFile(Book* book, int& size) {
+        ofstream out(file, ios_base::out);
+        if (out.is_open()) {
+            for (int i = 0; i < size; i++) {
+                out << book[i].id;
+                out << ":";
+                out << book[i].name;
+                out << ":";
+                out << book[i].author;
+                out << ":";
+                out << book[i].publisher;
+                out << ":";
+                out << book[i].genre;
+                out << ":";
+                out << book[i].year;
+                out << ":";
+                out << book[i].price;
+                out << "|";
+            }
+        }
+        else cout << "Error!" << endl;
+        out.close();
+    }
+    void FillFromFile(int idF, char* nameF, char* authorF, char* publisherF, char* genreF, int yearF, int priceF) {
+        id = idF;
+        strcpy_s(name, nameF);
+        strcpy_s(author, authorF);
+        strcpy_s(publisher, publisherF);
+        strcpy_s(genre, genreF);
+        year = yearF;
+        price = priceF;
+    }
 };
 // ---------------------------
 void ShowBook(Book& book, Table& T) {
@@ -250,26 +292,38 @@ Book* DeleteLastBook(Book* library, int& size) {
 }
 // ---------------------------
 // 3. Записати колекцію книг зроблену на попередній парі до файлу
-void WriteToFile(Book* library, int& size) {
-    ofstream out(file, ios_base::out);
-    if (out.is_open()) {
-        while (true) {
-
-        }
-    }
-    else cout << "Error!" << endl;
-    out.close();
-}
-
-
-
-
-
+// зробив в структурі Book
 
 // 4. Зчитати колекцію книг з файлу
+void ReadFromFile(Book*& library, int& size) {
+    ifstream in(file, ios_base::in);
+    char bid[250], bname[250], bauthor[250], bpublisher[250], bgenre[250], byear[250], bprice[250];
 
+    while (!in.eof()) {
+        int id = atoi(bid);
+        if (in.eof()) break;
+        in.getline(bid, 250, ':');
+        in.getline(bname, 250, ':');
+        in.getline(bauthor, 250, ':');
+        in.getline(bpublisher, 250, ':');
+        in.getline(bgenre, 250, ':');
+        in.getline(byear, 250, ':');
+        in.getline(bprice, 250, '|');
+        int year = atoi(byear);
+        float price = atof(bprice);
 
+        Book readBook;
+        readBook.FillFromFile(id, bname, bauthor, bpublisher, bgenre, year, price);
 
+        Book* temp = new Book[size + 1];
+        for (int i = 0; i < size; i++) {
+            temp[i].copy(library[i]);
+        }
+        temp[size] = readBook;
+        delete[] library;
+        library = temp;
+    }
+}
 
 
 
@@ -294,13 +348,11 @@ int main()
     { 7, "Book7", "Author7", "Publisher7", "Comedy", 2019, 19.5 },
     { 8, "Book8", "Author8", "Publisher8", "History", 2020, 35.25 },
     { 9, "Book9", "Author9", "Publisher9", "Sci-Fi", 2022, 28.75 },
-    { 10, "Book10", "Author10", "Publisher10", "Mystery", 2024, 40.0 }
-    };
+    { 10, "Book10", "Author10", "Publisher10", "Mystery", 2024, 40.0 } };
 
     do {
         system("cls");
         cout << "----------- Menu -----------" << endl;
-        cout << "Exit                     [0]" << endl;
         cout << "Show all books           [1]" << endl;
         cout << "Edit book price          [2]" << endl;
         cout << "Search by author         [3]" << endl;
@@ -309,8 +361,9 @@ int main()
         cout << "Search by genre          [6]" << endl;
         cout << "Add book                 [7]" << endl;
         cout << "Delete last book         [8]" << endl;
-        cout << "Insert to file           [9]" << endl;
-        cout << "Insert from file        [10]" << endl;
+        cout << "Write to file            [9]" << endl;
+        cout << "Read from file          [10]" << endl;
+        cout << "Exit                     [0]" << endl;
 
         cout << "Enter your choice: ";
         cin >> choice;
@@ -356,6 +409,16 @@ int main()
         case 8:
             library = DeleteLastBook(library, size);
             cout << "Last book successfully deleted!" << endl;
+            break;
+        case 9:
+            for (int i = 0; i < size; i++) {
+                library[i].WriteToFile(library, size);
+            }
+            cout << "Data successfully writed to file!" << endl;
+            break;
+        case 10:
+            ReadFromFile(library, size);
+            cout << "Data successfully writed to file!" << endl;
             break;
         default:
             cout << "Error!" << endl;
