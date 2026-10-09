@@ -1,7 +1,13 @@
 #include <iostream>
 #include <fstream>
 using namespace std;
+
 const char* file = "MyHumanBase.txt";
+
+
+
+
+
 struct Human {
 private:
     char name[50];
